@@ -1,0 +1,93 @@
+"use client";
+
+import { useState } from "react";
+import { Reveal } from "@/components/motion/Reveal";
+
+const CLAUSES = [
+  {
+    ref: "п. 3.1",
+    t: "Финальная цена в рублях",
+    d: "Стоимость автомобиля, логистики и таможенного оформления фиксируется в рублях на дату подписания договора и не подлежит одностороннему изменению. Курсовые колебания и изменение пошлин — риск исполнителя.",
+  },
+  {
+    ref: "п. 4.2",
+    t: "Сроки доставки",
+    d: "Предельный срок передачи автомобиля фиксируется в договоре. За каждый день просрочки по вине исполнителя начисляется неустойка от стоимости заказа.",
+  },
+  {
+    ref: "п. 5.3",
+    t: "Ответственность за автомобиль",
+    d: "С момента выкупа за рубежом и до подписания акта приема-передачи автомобиль застрахован, финансовую ответственность за его состояние несет исполнитель.",
+  },
+  {
+    ref: "п. 6.1",
+    t: "Возврат средств",
+    d: "Если автомобиль не проходит независимый технический аудит и стороны не согласовали замену лота, внесенные средства возвращаются в полном объеме в течение 5 банковских дней.",
+  },
+];
+
+export function ContractClauses() {
+  const [open, setOpen] = useState(0);
+
+  return (
+    <section className="flex flex-col gap-8 px-[6vw] pb-20 md:grid md:grid-cols-[1fr_1.2fr] md:gap-18 md:items-start md:px-[5vw] md:pb-30">
+      <Reveal className="static flex flex-col gap-4 md:sticky md:top-8 md:gap-5">
+        <div className="text-xs font-medium tracking-[0.24em] text-accent">
+          ДОГОВОР
+        </div>
+        <h2 className="m-0 max-w-[10em] text-balance font-display text-[clamp(32px,3.2vw,52px)] leading-[1.05] font-semibold text-ink">
+          Что зафиксировано письменно
+        </h2>
+        <p className="m-0 max-w-[440px] text-base leading-[1.65] text-ink-45">
+          Четыре пункта, которые закрывают главные риски заказа автомобиля
+          из-за рубежа. Нажмите, чтобы раскрыть формулировку.
+        </p>
+      </Reveal>
+
+      <div className="flex flex-col border-b border-border">
+        {CLAUSES.map((c, i) => {
+          const isOpen = open === i;
+          return (
+            <div
+              key={c.ref}
+              onClick={() => setOpen((s) => (s === i ? -1 : i))}
+              className="cursor-pointer border-t border-border px-2 py-6.5 transition-colors duration-[250ms] hover:bg-[oklch(96.5%_0.004_70)]"
+            >
+              <div className="flex items-baseline justify-between gap-5">
+                <div className="flex items-baseline gap-5.5">
+                  <span
+                    className={`w-9.5 flex-none font-mono text-xs tracking-[0.06em] transition-colors duration-300 md:w-13 ${
+                      isOpen ? "text-accent" : "text-ink-60"
+                    }`}
+                  >
+                    {c.ref}
+                  </span>
+                  <span className="font-display text-[22px] font-medium text-ink">
+                    {c.t}
+                  </span>
+                </div>
+                <span
+                  className={`flex-none font-sans text-xl leading-none text-ink-45 transition-transform duration-[350ms] ${
+                    isOpen ? "rotate-45" : "rotate-0"
+                  }`}
+                >
+                  +
+                </span>
+              </div>
+              <div
+                className="max-w-[560px] overflow-hidden font-sans text-[15px] leading-[1.7] text-ink-40 transition-[max-height,opacity,margin-top] duration-[450ms] ease-in-out md:ml-18.5"
+                style={
+                  isOpen
+                    ? { maxHeight: 220, opacity: 1, marginTop: 14 }
+                    : { maxHeight: 0, opacity: 0, marginTop: 0 }
+                }
+              >
+                {c.d}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}

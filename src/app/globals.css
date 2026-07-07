@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  /* Hex fallbacks for browsers without oklch() support — overridden below */
+  --color-bg: #faf9f6;
+  --color-ink: #1c1e22;
+  --color-accent: #2a5fe0;
+  --color-border: #e4e3e1;
+  --color-ink-25: #333538;
+  --color-ink-30: #3d3f42;
+  --color-ink-34: #464850;
+  --color-ink-38: #4f5259;
+  --color-ink-40: #565962;
+  --color-ink-45: #616570;
+  --color-ink-55: #7a7f8a;
+  --color-ink-60: #86899b;
+
+  --font-display: "Clash Display", var(--font-inter-tight), sans-serif;
+  --font-sans: var(--font-inter-tight), sans-serif;
+}
+
+@supports (color: oklch(0% 0 0)) {
+  :root {
+    --color-bg: oklch(98.5% 0.003 70);
+    --color-ink: oklch(18% 0.012 240);
+    --color-accent: oklch(58% 0.22 255);
+    --color-border: oklch(91% 0.005 240);
+    --color-ink-25: oklch(25% 0.01 240);
+    --color-ink-30: oklch(30% 0.01 240);
+    --color-ink-34: oklch(34% 0.01 240);
+    --color-ink-38: oklch(38% 0.01 240);
+    --color-ink-40: oklch(40% 0.01 240);
+    --color-ink-45: oklch(45% 0.008 240);
+    --color-ink-55: oklch(55% 0.008 240);
+    --color-ink-60: oklch(60% 0.008 240);
+  }
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-ink: var(--color-ink);
+  --color-accent: var(--color-accent);
+  --color-border: var(--color-border);
+  --color-ink-25: var(--color-ink-25);
+  --color-ink-30: var(--color-ink-30);
+  --color-ink-34: var(--color-ink-34);
+  --color-ink-38: var(--color-ink-38);
+  --color-ink-40: var(--color-ink-40);
+  --color-ink-45: var(--color-ink-45);
+  --color-ink-55: var(--color-ink-55);
+  --color-ink-60: var(--color-ink-60);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Desktop/mobile split matches the design's 760px cutoff exactly. */
+  --breakpoint-md: 760px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
