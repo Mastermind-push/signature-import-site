@@ -45,9 +45,9 @@ function ArtDirectedSlide({
     <picture className="absolute inset-0 block h-full w-full">
       <source
         media={`(min-width: ${MOBILE_BREAKPOINT}px)`}
-        srcSet={desktopSrcSet}
+        srcSet={desktopSrcSet ?? desktop.src}
       />
-      <source srcSet={mobileSrcSet} />
+      <source srcSet={mobileSrcSet ?? mobile.src} />
       <img
         {...mobileRest}
         alt=""
